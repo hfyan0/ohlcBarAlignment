@@ -4,11 +4,12 @@ import org.nirvana._
 
 object OHLCBarAlignment {
 
-val dfmt = DateTimeFormat.forPattern("yyyy-MM-dd")
+  val dfmt = DateTimeFormat.forPattern("yyyy-MM-dd")
 
   def main(args: Array[String]) {
 
     var mapSymOHLCB = Map[String, List[OHLCBar]]()
+    var lsSym = List[String]()
     var lsDates = List[DateTime]()
 
     args.foreach(x => {
@@ -18,6 +19,7 @@ val dfmt = DateTimeFormat.forPattern("yyyy-MM-dd")
 
       if (lsOHLCB.length > 0) {
         mapSymOHLCB += lsOHLCB.head.symbol -> lsOHLCB
+        lsSym = lsSym :+ lsOHLCB.head.symbol
         lsDates = lsDates ::: lsOHLCB.map(_.dt)
       }
     })
@@ -29,7 +31,8 @@ val dfmt = DateTimeFormat.forPattern("yyyy-MM-dd")
       var lsDateExist = List[Boolean]()
       var lsClose = List[Double]()
 
-      for ((sym, lsohlcb) <- mapSymOHLCB) {
+      lsSym.foreach(sym => {
+        val lsohlcb = mapSymOHLCB.get(sym).get
 
         lsohlcb.filter(_.dt == d) match {
           case Nil => lsDateExist = lsDateExist :+ false
@@ -39,7 +42,7 @@ val dfmt = DateTimeFormat.forPattern("yyyy-MM-dd")
               lsClose = lsClose :+ x.priceBar.c
             }
         }
-      }
+      })
 
       if (lsDateExist.forall(_ == true)) {
         print(dfmt.print(d))

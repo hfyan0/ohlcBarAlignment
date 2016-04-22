@@ -4,7 +4,7 @@ import AssemblyKeys._
 name := "ohlc_bar_alignment"
 
 // orgnization name (e.g., the package name of the project)
-organization := "net.sunny"
+organization := "org.nirvana.ohlcbalign"
 
 version := "1.0-SNAPSHOT"
 
