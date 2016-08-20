@@ -1,0 +1,3 @@
+src/main/scala/OHLCBarAlignment.scala
+src/test/scala/OHLCBarAlignmentSpec.scala
+../nirvanaCommon/src/main/scala/org/nirvana/Utilities.scala
